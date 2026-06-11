@@ -1,12 +1,310 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人网站</title>
+    <title>Chenxu Wang</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --muted: #8b949e;
+            --accent: #58a6ff;
+        }
+
+        [data-theme="light"] {
+            --bg: #ffffff;
+            --surface: #f6f8fa;
+            --border: #d0d7de;
+            --text: #1f2328;
+            --muted: #656d76;
+            --accent: #0969da;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 24px 60px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px; right: 24px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            width: 40px; height: 40px;
+            display: flex;
+            align-items: center; justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: border-color 0.2s;
+        }
+        .theme-toggle:hover { border-color: var(--accent); }
+        .theme-toggle .sun,
+        .theme-toggle .moon {
+            position: absolute;
+            width: 20px; height: 20px;
+            fill: var(--text);
+            transition: opacity 0.3s, transform 0.4s;
+        }
+        [data-theme="dark"] .sun { opacity: 1; transform: rotate(0); }
+        [data-theme="dark"] .moon { opacity: 0; transform: rotate(90deg); }
+        [data-theme="light"] .sun { opacity: 0; transform: rotate(-90deg); }
+        [data-theme="light"] .moon { opacity: 1; transform: rotate(0); }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            margin-bottom: 48px;
+            padding-bottom: 36px;
+            border-bottom: 1px solid var(--border);
+        }
+        .header .avatar {
+            width: 220px;
+            height: 293px;
+            object-fit: cover;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        .header .affiliation {
+            color: var(--accent);
+            font-weight: 500;
+            margin: 4px 0 8px;
+        }
+        .header .contact {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+        .header .contact a {
+            color: var(--muted);
+            text-decoration: none;
+        }
+        .header .contact a:hover { color: var(--accent); }
+
+        section {
+            margin-bottom: 40px;
+        }
+        section h2 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border);
+        }
+        section h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        section h3 a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        section h3 a:hover { text-decoration: underline; }
+
+        .item {
+            margin-bottom: 20px;
+        }
+        .item .meta {
+            color: var(--muted);
+            font-size: 0.82rem;
+            margin-bottom: 2px;
+        }
+        .item .meta .right {
+            float: right;
+        }
+        .item .desc {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+        .item .links {
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+        .item .links a {
+            color: var(--muted);
+            text-decoration: none;
+        }
+        .item .links a:hover { color: var(--accent); text-decoration: underline; }
+        .item .links span { color: var(--muted); margin: 0 6px; }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul.dashed li {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 3px;
+        }
+        ul.dashed li::before {
+            content: "— ";
+            color: var(--muted);
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 32px;
+        }
+        .skills-list .group {
+            margin-bottom: 10px;
+        }
+        .skills-list .group strong {
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+        .skills-list .group span {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 60px 16px 40px; }
+            .header { flex-direction: column; text-align: center; gap: 16px; }
+            .header .avatar { width: 180px; height: 240px; }
+            .header h1 { font-size: 1.5rem; }
+            .item .meta .right { float: none; display: block; }
+            .theme-toggle { top: 12px; right: 12px; }
+        }
+    </style>
 </head>
 <body>
-    <h1>你好，世界！</h1>
-    <p>欢迎来到我的第一个个人网站。这里是使用 GitHub Pages 搭建的。</p>
+
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg class="sun" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3" stroke="var(--text)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="12" y1="21" x2="12" y2="23" stroke="var(--text)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="var(--text)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="var(--text)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="1" y1="12" x2="3" y2="12" stroke="var(--text)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="21" y1="12" x2="23" y2="12" stroke="var(--text)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="var(--text)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="var(--text)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <svg class="moon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+    </button>
+
+    <div class="header">
+        <img class="avatar" src="images/wcx_football.jpg" alt="Chenxu Wang">
+        <div>
+            <h1>Chenxu Wang</h1>
+            <p class="affiliation">Information Security, Fudan University</p>
+            <p class="contact">
+                <span>+86-19370553738</span> &middot;
+                <a href="mailto:chenxuwang22@m.fudan.edu.cn">chenxuwang22@m.fudan.edu.cn</a><br>
+                220 Handan Rd, Yangpu District, Shanghai, P.R.C
+            </p>
+        </div>
+    </div>
+
+    <section id="education">
+        <h2>Education</h2>
+        <div class="item">
+            <div class="meta">
+                <strong>Fudan University</strong>, Shanghai, P.R.C
+                <span class="right">09/2022 – 06/2027 (Expected)</span>
+            </div>
+            <p class="desc">B.S. in Information Security · GPA: 3.82/4.00 (Rank 3/30)</p>
+        </div>
+    </section>
+
+    <section id="publications">
+        <h2>Publications &amp; Projects</h2>
+
+        <div class="item">
+            <h3><a href="https://arxiv.org/abs/2606.01285" target="_blank">KIVI</a></h3>
+            <div class="meta"><span class="right">2026</span></div>
+            <p class="desc">A parameter-efficient framework for vision models.</p>
+            <div class="links">
+                <a href="https://arxiv.org/abs/2606.01285" target="_blank">arXiv</a><span>·</span>
+                <a href="https://github.com/wcxhimself/KIVI" target="_blank">Code</a>
+            </div>
+        </div>
+
+        <div class="item">
+            <h3><a href="#" target="_blank">Zero-Shot CLIP as a Natural Router for Class-Incremental Learning</a></h3>
+            <div class="meta">Advisor: Prof. Zuxuan Wu <span class="right">2025</span></div>
+            <p class="desc">Used CLIP's zero-shot logits as a natural task router for parameter-efficient class-incremental learning with per-task LoRA and EOT prompts — no replay, no extra router training. Achieved 78.31% on CIFAR-100 and 80.88% on ImageNet-R.</p>
+        </div>
+    </section>
+
+    <section id="awards">
+        <h2>Awards &amp; Honors</h2>
+        <ul class="dashed">
+            <li>National Scholarship (2024)</li>
+            <li>Special Award, CCF National Collegiate Blockchain Technology and Innovation Application Competition (2025)</li>
+            <li>Fudan Second-Class Scholarship (2023)</li>
+            <li>Fudan Excellent Student (Rank 1/30, 2024)</li>
+            <li>Fudan Star of Fitness (2024)</li>
+        </ul>
+    </section>
+
+    <section id="skills">
+        <h2>Technical Skills</h2>
+        <div class="skills-list">
+            <div class="group">
+                <strong>Deep Learning</strong> &mdash;
+                <span>PyTorch, model training &amp; optimization</span>
+            </div>
+            <div class="group">
+                <strong>Programming</strong> &mdash;
+                <span>C++, Python (OOP)</span>
+            </div>
+            <div class="group">
+                <strong>Tools</strong> &mdash;
+                <span>Git, GDB, Docker, Linux/Shell</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Chenxu Wang</p>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        (function() {
+            const saved = localStorage.getItem('theme');
+            if (saved) document.documentElement.setAttribute('data-theme', saved);
+        })();
+    </script>
+
 </body>
 </html>
