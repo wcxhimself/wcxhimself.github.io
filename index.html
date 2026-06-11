@@ -67,7 +67,7 @@
 
         .header {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 32px;
             margin-bottom: 48px;
             padding-bottom: 36px;
@@ -86,7 +86,6 @@
             letter-spacing: -0.02em;
         }
         .header .affiliation {
-            color: var(--accent);
             font-weight: 500;
             margin: 4px 0 8px;
         }
@@ -120,31 +119,37 @@
         }
         section h3 a:hover { text-decoration: underline; }
 
-        .item {
-            margin-bottom: 20px;
+        .pub-line {
+            margin-bottom: 16px;
         }
-        .item .meta {
-            color: var(--muted);
-            font-size: 0.82rem;
-            margin-bottom: 2px;
+        .pub-line .pub-title {
+            font-size: 0.95rem;
+            font-weight: 600;
         }
-        .item .meta .right {
-            float: right;
-        }
-        .item .desc {
-            color: var(--muted);
-            font-size: 0.9rem;
-        }
-        .item .links {
-            font-size: 0.85rem;
-            margin-top: 4px;
-        }
-        .item .links a {
-            color: var(--muted);
+        .pub-line .pub-title a {
+            color: var(--accent);
             text-decoration: none;
         }
-        .item .links a:hover { color: var(--accent); text-decoration: underline; }
-        .item .links span { color: var(--muted); margin: 0 6px; }
+        .pub-line .pub-title a:hover { color: var(--accent); }
+        .pub-line .pub-authors {
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin: 2px 0;
+        }
+        .pub-line .pub-meta {
+            color: var(--muted);
+            font-size: 0.83rem;
+            font-style: italic;
+        }
+        .pub-line .pub-links {
+            font-size: 0.85rem;
+            margin-top: 2px;
+        }
+        .pub-line .pub-links a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .pub-line .pub-links a:hover { color: var(--accent); }
 
         ul {
             list-style: none;
@@ -219,7 +224,7 @@
         <img class="avatar" src="images/wcx_football.jpg" alt="Chenxu Wang">
         <div>
             <h1>Chenxu Wang</h1>
-            <p class="affiliation">Information Security, Fudan University</p>
+            <p class="affiliation">Fudan University</p>
             <p class="contact">
                 <span>+86-19370553738</span> &middot;
                 <a href="mailto:chenxuwang22@m.fudan.edu.cn">chenxuwang22@m.fudan.edu.cn</a><br>
@@ -235,56 +240,25 @@
                 <strong>Fudan University</strong>, Shanghai, P.R.C
                 <span class="right">09/2022 – 06/2027 (Expected)</span>
             </div>
-            <p class="desc">B.S. in Information Security · GPA: 3.82/4.00 (Rank 3/30)</p>
+            <p class="desc">B.S. in Information Security</p>
         </div>
     </section>
 
     <section id="publications">
         <h2>Publications &amp; Projects</h2>
 
-        <div class="item">
-            <h3><a href="https://arxiv.org/abs/2606.01285" target="_blank">KIVI</a></h3>
-            <div class="meta"><span class="right">2026</span></div>
-            <p class="desc">A parameter-efficient framework for vision models.</p>
-            <div class="links">
-                <a href="https://arxiv.org/abs/2606.01285" target="_blank">arXiv</a><span>·</span>
+        <div class="pub-line">
+            <div class="pub-title"><a href="https://arxiv.org/abs/2606.01285" target="_blank">KIVI: Knowledge-Intensive Video Generation</a></div>
+            <p class="pub-authors"><strong>Chenxu Wang</strong>, Mingda Chen</p>
+            <p class="pub-meta">arXiv Preprint, 2026</p>
+            <p class="pub-links">
+                <a href="https://arxiv.org/abs/2606.01285" target="_blank">arXiv</a> /
                 <a href="https://github.com/wcxhimself/KIVI" target="_blank">Code</a>
-            </div>
+            </p>
         </div>
 
-        <div class="item">
-            <h3><a href="#" target="_blank">Zero-Shot CLIP as a Natural Router for Class-Incremental Learning</a></h3>
-            <div class="meta">Advisor: Prof. Zuxuan Wu <span class="right">2025</span></div>
-            <p class="desc">Used CLIP's zero-shot logits as a natural task router for parameter-efficient class-incremental learning with per-task LoRA and EOT prompts — no replay, no extra router training. Achieved 78.31% on CIFAR-100 and 80.88% on ImageNet-R.</p>
-        </div>
-    </section>
-
-    <section id="awards">
-        <h2>Awards &amp; Honors</h2>
-        <ul class="dashed">
-            <li>National Scholarship (2024)</li>
-            <li>Special Award, CCF National Collegiate Blockchain Technology and Innovation Application Competition (2025)</li>
-            <li>Fudan Second-Class Scholarship (2023)</li>
-            <li>Fudan Excellent Student (Rank 1/30, 2024)</li>
-            <li>Fudan Star of Fitness (2024)</li>
-        </ul>
-    </section>
-
-    <section id="skills">
-        <h2>Technical Skills</h2>
-        <div class="skills-list">
-            <div class="group">
-                <strong>Deep Learning</strong> &mdash;
-                <span>PyTorch, model training &amp; optimization</span>
-            </div>
-            <div class="group">
-                <strong>Programming</strong> &mdash;
-                <span>C++, Python (OOP)</span>
-            </div>
-            <div class="group">
-                <strong>Tools</strong> &mdash;
-                <span>Git, GDB, Docker, Linux/Shell</span>
-            </div>
+        <div class="pub-line">
+            <div class="pub-title">Zero-Shot CLIP as a Natural Router for Class-Incremental Learning</div>
         </div>
     </section>
 
